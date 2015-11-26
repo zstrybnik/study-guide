@@ -1,0 +1,31 @@
+ArticleBundle\Entity\Article:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        slug:
+            type: string
+            length: 255
+            unique: true
+
+        title:
+            type: string
+            length: 255
+
+        author:
+            type: string
+            length: 100
+
+        tags:
+            type: string
+            length: 255
+
+        content:
+            type: text
+
+    lifecycleCallbacks: {  }

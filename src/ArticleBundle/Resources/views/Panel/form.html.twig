@@ -1,0 +1,130 @@
+{% extends '@Article/header.html.twig' %}
+{% block title %}Dodaj nowy artykuł{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-8 col-sm-push-4">
+            <div class="page-header">
+                <h1>Dodaj nowy atykuł</h1>
+
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+    <style>
+
+    </style>
+    <div class="row">
+        <div class="col-sm-8 col-sm-push-4">
+
+            {{ form_start(form) }}
+
+            <table id="newArticle" class="table2">
+                <tr>
+                    <td colspan="2">
+                        {{ form_errors(form) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px;">
+                        {{ form_label(form.title, 'Tytuł ') }} :
+                    </td>
+                    <td style="width: 100px;">
+                        {{ form_widget(form.title, { 'attr' : { 'style' : 'width: 300px;' } }) }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="width: 100px;">
+                        <label>Link do artukułu :</label>
+                    </td>
+                    <td style="width: 100px;">
+                        <div class="well well-sm" style="width: 300px; height: 34px;padding: 6px 12px; margin-top: 10px">
+                            <a id="slug"  target="_blank" href=""></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ form_label(form.author, 'Autor') }} :
+                    </td>
+                    <td>
+                        {{ form_widget(form.author, { 'attr' : { 'style' : 'width: 300px;' } }) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ form_label(form.tags, 'Tagi') }} :
+                    </td>
+                    <td>
+                        {{ form_widget(form.tags) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td style="width: 900px;">
+                        {{ form_widget(form.content) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" class="btn btn-primary btn-lg" value="Save">
+                    </td>
+                </tr>
+            </table>
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+    <script>
+        function getSlug(t){
+            var charMap = {
+                ą:'a', ć:'c', ę:'e',ł:'l', ń:'n', ó:'o', ś:'s' ,ż:'z', ź:'z',
+                Ą:'A', Ć:'C', Ę:'E', Ł:'L', Ń:'N', Ś:'S', Ó:'O', Ż:'Z', Ź:'Z',
+            };
+            var str_array = t.split('');
+            for( var i = 0, len = str_array.length; i < len; i++ ) {
+                str_array[ i ] = charMap[ str_array[ i ] ] || str_array[ i ];
+            };
+
+            var slugreplace = str_array.join('');
+            var slugcontent_hyphens = slugreplace.replace(/\s/g,'-');
+            return slugcontent_hyphens.replace(/[^a-zA-Z0-9\-]/g,'');
+        }
+        $(document).ready( function() {
+            $('#form_tags').change(function(){
+                var t = $('#form_tags').val();
+                t = getSlug(t);
+                $('#form_tags').val( t.replace(/\-/g, ';')  );
+            });
+
+            $('#form_title').keypress(function() {
+                var finishedslug = getSlug( $('#form_title').val() );
+                var uri = '{{ app.request.uri }}';
+
+                $('#slug').attr("href", uri.replace('/panel/article/add','/') + finishedslug.toLowerCase() );
+                $('#slug').text( finishedslug.toLowerCase() );
+                $('#form_slug').val(finishedslug.toLowerCase());
+                //$('#form_tags').val( finishedslug.replace('-', ';')  );
+            });
+
+            $('#slug').text( $('#form_slug').val( ) );
+        });
+    </script>
+{% endblock %}

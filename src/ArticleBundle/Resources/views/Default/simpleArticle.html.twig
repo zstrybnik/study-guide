@@ -1,0 +1,36 @@
+{%  extends '@Article/header.html.twig' %}
+{% block title %}{{ article.getTitle() }}{% endblock %}
+{% block body %}
+    <div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <h1>{{ article.getTitle() }}</h1>
+                    <p>Posted by <span class="glyphicon glyphicon-user"></span> {{ article.getAuthor() }}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-sm-8">
+
+                {{ article.getContent()|raw }}
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-8">
+
+                <span class="label label-default">Tagi :</span>&nbsp;&nbsp;{{ article.getTags()|replace(';', ' ') }}
+
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+
+{% endblock %}
