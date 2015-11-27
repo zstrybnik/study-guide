@@ -1,0 +1,55 @@
+{% extends '@Article/header.html.twig' %}
+{% block body %}
+    <table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Lp.</th>
+                    <th>Tytuł artykułu</th>
+                    <th>Autor</th>
+                    <th>Tagi</th>
+                    <th>Operacja</th>
+                </tr>
+            </thead>
+            <tbody>
+        {% for article in articles %}
+                <tr>
+                    <td>{{ article.getId }}</td>
+                    <td>{{ article.getTitle }}</td>
+                    <td>{{ article.getAuthor }}</td>
+                    <td>{{ article.getTags }}</td>
+                    <td>
+                        <a href="{{ path('article_edit', {'slug':  article.getSlug }) }}">Edit</a>
+                        <a href="{{ path('article_remove', {'slug':  article.getSlug }) }}">Remove</a>
+                    </td>
+                </tr>
+        {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Lp.</th>
+                    <th>Tytuł artykułu</th>
+                    <th>Autor</th>
+                    <th>Tagi</th>
+                    <th>Operacja</th>
+                </tr>
+            </tfoot>
+        </table>
+        <nav >
+            <ul class="pagination" >
+
+                <li  {% if page == 1 %} class="disabled" {% endif %}><a href="{% if page == 1  %} # {% else %} {{ path('article_allArticle', {'page': page -1 }) }}{% endif %}  " aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                {% for i in count %}
+                    <li {% if page == i %} class="active" {% endif %}><a href="{{ path('article_allArticle', {'page': i }) }}">{{ i }} <span class="sr-only">(current)</span></a></li>
+                {% endfor %}
+                <li {% if page == count %} class="disabled" {% endif %}>
+                    <a href="{% if page == count  %} # {% else %} {{ path('article_allArticle', {'page': page +1 }) }}  {% endif %}  " aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}

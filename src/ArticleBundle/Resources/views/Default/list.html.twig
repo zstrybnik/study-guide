@@ -7,8 +7,12 @@
                 <a href="/{{ article.getSlug }}" class="list-group-item ">
                     <h4 class="list-group-item-heading">{{ article.getTitle }}</h4>
                     <p class="list-group-item-text">
-                        {% set contentRaw = article.getContent|raw %}
-                        {{ article.getContent|length > 750 ? contentRaw|slice(0, 750) ~ '...' : contentRaw  }}
+                    {% if article.getContent|length > 750 %}
+                       {% set craw = article.getContent|slice(0, 750) %}
+                        {{ craw|raw }} ...
+                    {% else %}
+                        {{ article.getContent|raw }}
+                    {% endif %}
                     </p>
                 </a>
 

@@ -1,28 +1,35 @@
 article_homepage:
     path:     /
-    defaults: { _controller: ArticleBundle:Default:index }
-
-
-article_panel:
-    path:   /panel
-    defaults: { _controller: ArticleBundle:Panel:panel }
+    defaults: { _controller: ArticleBundle:Default:listAllArticles, page:1 }
+    methods: [GET]
 
 article_add:
-    path:     /panel/article/add
+    path:     /articles/add
     defaults: { _controller: ArticleBundle:Panel:addArticle}
 
 article_edit:
-    path:   /panel/article/edit/{$slug}
+    path:   /articles/edit/{slug}
     defaults: { _controller: ArticleBundle:Panel:editArticle }
 
-article_myArticle:
-    path: /panel/article/my
+article_my:
+    path:   /articles/my
     defaults: { _controller: ArticleBundle:Panel:myArticleList }
 
-article_allArticle:
-    path: /articles/{page}
-    defaults: { _controller: ArticleBundle:Default:listAllArticles, page:1 }
+article_remove:
+    path:   /articles/remove/{slug}
+    defaults: { _controller: ArticleBundle:Panel:articlesDelete}
 
+article_list:
+    path:     /articles/{page}
+    defaults: { _controller: ArticleBundle:Panel:articlesList, page:1}
+
+article_allArticle:
+    path: /{page}
+    defaults: { _controller: ArticleBundle:Default:listAllArticles, page:1 }
+    requirements:
+             page:  \d+
+    methods: [GET]
 article_select:
     path:     /{slug}
     defaults: { _controller: ArticleBundle:Default:viewSelectArticle}
+    methods: [GET]
