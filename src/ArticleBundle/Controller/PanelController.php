@@ -105,7 +105,13 @@ class PanelController extends Controller
     }
 
     public function articlesDeleteAction($slug){
+        $ob = $this->getDoctrine()->getRepository('ArticleBundle:Article')->findOneBy( ['slug' => $slug]);
+        $em = $this->getDoctrine()->getManager();
 
+        if ( $ob !== FALSE ){
+            $em->remove($ob);
+            $em->flush();
+        }
         return $this->redirectToRoute('article_list');
     }
 }
