@@ -371,7 +371,8 @@ footer#site-footer .side-right ul li a:hover{
 	margin:0 0 20px 0
 }
 #site-content.page.page-core-index #sections .section-carousel .carousel .carousel-content p{
-	line-height:1.5em;font-size:13pt
+	line-height:1.5em;
+	font-size:13pt
 }
 #site-content.page.page-core-article h2.page-title{
 	text-align:center;font:700 32pt/1.15em "Helvetica Neue","HelveticaNeue","Helvetica","Source Sans Pro","Arial",Sans-serif;
@@ -398,10 +399,10 @@ a.article{
 	padding: 10px 15px;
 
 }
-a.article h1{
+a.article .title{
 	text-align:center;font:700 32pt/1.15em "Helvetica Neue","HelveticaNeue","Helvetica","Source Sans Pro","Arial",Sans-serif;
 	color:#0faa63;
-	margin:0 0 50px 0
+	margin:0 0 20px 0;
 }
 
 a.article p{
@@ -409,6 +410,8 @@ a.article p{
 	color:#2b2d2e;
 	line-height:1.75em;
 	margin:0 0 30px 0;
+	text-align: left;
+	font-size:13pt;
 }
 
 /**

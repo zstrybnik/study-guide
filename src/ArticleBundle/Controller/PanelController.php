@@ -39,7 +39,7 @@ class PanelController extends Controller
                 $em->persist($article);
                 $em->flush();
 
-                return $this->redirectToRoute('article_list');
+                return $this->redirect('/' . $data['slug']);
             }else{
                 $form->addError(new FormError("Tytuł ten występuje już w bazie wiedzy!"));
             }
@@ -76,7 +76,7 @@ class PanelController extends Controller
                 $em->persist($article);
                 $em->flush();
 
-                return $this->redirectToRoute('article_list');
+                return $this->redirect('/' . $data['slug']);
             }else{
                 $form->addError(new FormError("Tytuł ten występuje już w bazie wiedzy!"));
             }
