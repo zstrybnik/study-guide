@@ -1,36 +1,18 @@
 {%  extends '@Article/header.html.twig' %}
 {% block title %}{{ article.getTitle() }}{% endblock %}
-{% block body %}
-    <div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-header">
-                    <h1>{{ article.getTitle() }}</h1>
-                    <p>Posted by <span class="glyphicon glyphicon-user"></span> {{ article.getAuthor() }}</p>
+{% block site_content %}
+    <div id="site-content" class="page page-padding page-core-article">
+        <div class="container">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                    <article class="fullwidth">
+                        <h2 class="page-title">{{ article.getTitle() }}</h2>
+                        {{ article.getContent()|raw }}
+                    </article>
+                    {% set tags =  article.getTags|split(';')%}
+                    {% for tag in tags %}
+                    <span class="label label-success">{{ tag }}</span>
+                    {% endfor %}
                 </div>
-            </div>
         </div>
-
-
-        <!-- /.row -->
-
-        <div class="row">
-            <div class="col-sm-8">
-
-                {{ article.getContent()|raw }}
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-8">
-
-                <span class="label label-default">Tagi :</span>&nbsp;&nbsp;{{ article.getTags()|replace(';', ' ') }}
-
-            </div>
-        </div>
-        <!-- /.row -->
-
     </div>
-
 {% endblock %}

@@ -26,8 +26,8 @@ class DefaultController extends Controller
         $count = count($this->getDoctrine()->getRepository('ArticleBundle:Article')->findBy(
             [], ['id' => 'DESC']
         ));
-
-       return $this->render('ArticleBundle:Default:list.html.twig', ['articles' => $articles, 'count' => intval($count / 10), 'page' => $page ]);
+        $article_count = ( intval($count / 10) == 0 ) ? 1 : intval($count / 10);
+       return $this->render('ArticleBundle:Default:list.html.twig', ['articles' => $articles, 'article_count' => $article_count, 'page' => $page ]);
     }
 
     /**

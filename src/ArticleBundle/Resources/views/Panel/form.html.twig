@@ -1,97 +1,41 @@
 {% extends '@Article/header.html.twig' %}
-{% block title %}Dodaj nowy artykuł{% endblock %}
-{% block body %}
-    <div class="row">
-        <div class="col-sm-8 col-sm-push-4">
-            <div class="page-header">
-                <h1>{{ title }}</h1>
+{% block title %}Study guide | new article{% endblock %}
+{% block site_content %}
+    <div id="site-content" class="page page-core-index">
+    {{ form_start(form) }}
+    <div class="section section-hello text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                    <h1>{{ title }}</h1>
+                </div>
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" style="text-align: left">
 
+                        {{ form_errors(form) }}
+
+                        {{ form_row(form.title, {'label' :  'Tytuł :'}) }}
+
+                        <div class="form-group">
+                            <label class="control-label required" >Link do artykułu :</label>
+                            <div class="form-control" style="background-color: #ebeded">
+                                <a id="slug"  target="_blank" href=""></a>
+                            </div>
+                        </div>
+
+                        {{ form_row(form.author, { 'label' : 'Autor :'}) }}
+
+                        {{ form_row(form.tags, {'label' : 'Tagi :'}) }}
+
+                        {{ form_widget(form.content) }}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-lg" value="Save">
+                        </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- /.row -->
-    <style>
 
-    </style>
-    <div class="row">
-        <div class="col-sm-8 col-sm-push-4">
-
-            {{ form_start(form) }}
-
-            <table id="newArticle" class="table2">
-                <tr>
-                    <td colspan="2">
-                        {{ form_errors(form) }}
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width: 100px;">
-                        {{ form_label(form.title, 'Tytuł ') }} :
-                    </td>
-                    <td style="width: 100px;">
-                        {{ form_widget(form.title, { 'attr' : { 'style' : 'width: 300px;' } }) }}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td style="width: 100px;">
-                        <label>Link do artukułu :</label>
-                    </td>
-                    <td style="width: 100px;">
-                        <div class="well well-sm" style="width: 300px; height: 34px;padding: 6px 12px; margin-top: 10px">
-                            <a id="slug"  target="_blank" href=""></a>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>
-                        {{ form_label(form.author, 'Autor') }} :
-                    </td>
-                    <td>
-                        {{ form_widget(form.author, { 'attr' : { 'style' : 'width: 300px;' } }) }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>
-                        {{ form_label(form.tags, 'Tagi') }} :
-                    </td>
-                    <td>
-                        {{ form_widget(form.tags) }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td style="width: 900px;">
-                        {{ form_widget(form.content) }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="submit" class="btn btn-primary btn-lg" value="Save">
-                    </td>
-                </tr>
-            </table>
-            {{ form_end(form) }}
-
-        </div>
-    </div>
+    {{ form_end(form) }}
     <script>
         function getSlug(t){
             var charMap = {
@@ -127,4 +71,5 @@
             $('#slug').text( $('#form_slug').val( ) );
         });
     </script>
+    </div>
 {% endblock %}

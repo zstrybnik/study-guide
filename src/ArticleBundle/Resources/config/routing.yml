@@ -7,21 +7,21 @@ article_add:
     path:     /articles/add
     defaults: { _controller: ArticleBundle:Panel:addArticle}
 
-article_edit:
-    path:   /articles/edit/{slug}
-    defaults: { _controller: ArticleBundle:Panel:editArticle }
+#article_edit:
+#    path:   /articles/edit/{slug}
+#    defaults: { _controller: ArticleBundle:Panel:editArticle }
 
-article_my:
-    path:   /articles/my
-    defaults: { _controller: ArticleBundle:Panel:myArticleList }
+#article_my:
+#    path:   /articles/my
+#    defaults: { _controller: ArticleBundle:Panel:myArticleList }
 
-article_remove:
-    path:   /articles/remove/{slug}
-    defaults: { _controller: ArticleBundle:Panel:articlesDelete}
+#article_remove:
+#    path:   /articles/remove/{slug}
+#    defaults: { _controller: ArticleBundle:Panel:articlesDelete}
 
-article_list:
-    path:     /articles/{page}
-    defaults: { _controller: ArticleBundle:Panel:articlesList, page:1}
+#article_list:
+#    path:     /articles/{page}
+#    defaults: { _controller: ArticleBundle:Panel:articlesList, page:1}
 
 article_allArticle:
     path: /{page}
@@ -29,6 +29,7 @@ article_allArticle:
     requirements:
              page:  \d+
     methods: [GET]
+
 article_select:
     path:     /{slug}
     defaults: { _controller: ArticleBundle:Default:viewSelectArticle}

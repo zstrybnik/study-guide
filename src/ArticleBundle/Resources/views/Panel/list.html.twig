@@ -1,5 +1,5 @@
 {% extends '@Article/header.html.twig' %}
-{% block body %}
+{% block site_content %}
     <table>
         <table class="table">
             <thead>
@@ -12,15 +12,20 @@
                 </tr>
             </thead>
             <tbody>
+            {% set liczba = 0 %}
+            {% set roz = false %}
         {% for article in articles %}
+            {% set liczba = liczba + 1 %}
                 <tr>
-                    <td>{{ article.getId }}</td>
+                    <td>{{ liczba }}</td>
                     <td>{{ article.getTitle }}</td>
                     <td>{{ article.getAuthor }}</td>
                     <td>{{ article.getTags }}</td>
                     <td>
+                        {% if roz == true %}
                         <a href="{{ path('article_edit', {'slug':  article.getSlug }) }}">Edit</a>
                         <a href="{{ path('article_remove', {'slug':  article.getSlug }) }}">Remove</a>
+                        {% endif %}
                     </td>
                 </tr>
         {% endfor %}

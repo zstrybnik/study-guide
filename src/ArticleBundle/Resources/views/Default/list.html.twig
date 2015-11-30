@@ -1,38 +1,48 @@
 {% extends '@Article/header.html.twig' %}
-{% block body %}
-    <div>
-        <div class="list-group" style="width: 80%; margin: 0 auto" >
-        {% for article in articles %}
+{% block site_content %}
+    <div id="site-content" class="page page-core-index">
+        <div id="sections">
+                    <div class="section section-hello text-center">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+                                    {% for article in articles %}
+                                    <a href="/{{ article.getSlug }}" class="article">
+                                    <h1>{{ article.getTitle }}</h1>
+                                    <p>
+                                    {% set con = article.getContent|split(' ') %}
+                                    {% if con|length > 50 %}
+                                        {% for i in 1..50 %}
+                                            {{ con[i]|raw }}
+                                        {% endfor %} <b style="color: #0faa63;">czytaj więcej ..</b>
+                                    {% else %}
+                                        {{ article.getContent|raw }}
+                                    {% endif %}
+                                    </p>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                 <nav class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                                    <ul class="pagination" >
+                                        <li  {% if page == 1 %} class="disabled" {% endif %}><a href="{% if page == 1  %} # {% else %} {{ path('article_allArticle', {'page': page -1 }) }}{% endif %}  " aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                                        {% for i in range(1, article_count) %}
+                                            <li {% if page == i %} class="active" {% endif %}><a href="{{ path('article_allArticle', {'page': i }) }}">{{ i }} <span class="sr-only">(current)</span></a></li>
+                                        {% endfor %}
+                                        <li {% if page == article_count  %} class="disabled" {% endif %}>
+                                            <a href="{% if page == article_count  %} # {% else %} {{ path('article_allArticle', {'page': page +1 }) }}  {% endif %}  " aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
 
-                <a href="/{{ article.getSlug }}" class="list-group-item ">
-                    <h4 class="list-group-item-heading">{{ article.getTitle }}</h4>
-                    <p class="list-group-item-text">
-                    {% if article.getContent|length > 750 %}
-                       {% set craw = article.getContent|slice(0, 750) %}
-                        {{ craw|raw }} ...
-                    {% else %}
-                        {{ article.getContent|raw }}
-                    {% endif %}
-                    </p>
-                </a>
-
-        {% endfor %}
+                                    </ul>
+                                  </nav>
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
-        <nav >
-            <ul class="pagination" >
-
-                <li  {% if page == 1 %} class="disabled" {% endif %}><a href="{% if page == 1  %} # {% else %} {{ path('article_allArticle', {'page': page -1 }) }}{% endif %}  " aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                {% for i in count %}
-                    <li {% if page == i %} class="active" {% endif %}><a href="{{ path('article_allArticle', {'page': i }) }}">{{ i }} <span class="sr-only">(current)</span></a></li>
-                {% endfor %}
-                <li {% if page == count %} class="disabled" {% endif %}>
-                    <a href="{% if page == count  %} # {% else %} {{ path('article_allArticle', {'page': page +1 }) }}  {% endif %}  " aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-
-            </ul>
-        </nav>
     </div>
 
 {% endblock %}
