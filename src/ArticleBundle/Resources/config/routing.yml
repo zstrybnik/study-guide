@@ -7,6 +7,14 @@ article_add:
     path:     /articles/add
     defaults: { _controller: ArticleBundle:Panel:addArticle}
 
+api_article:
+    path:     /api/article/{id}
+    defaults: { _controller: ArticleBundle:Api:getArticle}
+
+api_random_article:
+    path:     /api/article
+    defaults: { _controller: ArticleBundle:Api:getRamdomArticle}
+
 #article_edit:
 #    path:   /articles/edit/{slug}
 #    defaults: { _controller: ArticleBundle:Panel:editArticle }
